@@ -38,7 +38,7 @@ componentDidMount() {
                             {this.state.dataset.map((row, i) => 
                                 <tr key={i}>
                                     {row.map((col, j) => 
-                                        j === row.length - 1 ? 
+                                        ((j === row.length - 1) && (i > 0)) ? 
                                             <td key={j}><a href={col} target="_blank" rel="noopener noreferrer">{col}</a></td> :
                                             <td key={j}>{col}</td> 
                                      )}

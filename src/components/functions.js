@@ -20,6 +20,7 @@ export function visitLinks(links) {
     let axios = require('axios');
 
     let dataset = [[
+        " ",
         "year",
         "title",
         "condition",
@@ -28,6 +29,8 @@ export function visitLinks(links) {
         "transmission",
         "link"
     ]];
+
+    let counter = 1;
     
     for(var i=0; i<links.length; i++) {
     // for(let i=0; i<1; i++) {
@@ -90,9 +93,15 @@ export function visitLinks(links) {
             // url
             data.push(this_url)
 
+            // remove key
+            for(let i=0; i<6; i++) {
+                data[i] = data[i].split(': ')[1].trim()}
+
             // add array
+            data.unshift(counter)
+            counter++
             dataset.push(data)
-    })}
-    // console.log(dataset)
+        })
+    }
     return(dataset);
 }
