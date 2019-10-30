@@ -26,28 +26,62 @@ export function visitLinks(links) {
         let response = axios.get(CORS_PROXY + links[i]);        
         response.then(response => {
             el.innerHTML = response.data;
-
-
-            
+            // let this_url = "=HYPERLINK(\"" + el.innerHTML.split('rel="canonical" href="')[1].split('">')[0] + "\")"
             let this_url = el.innerHTML.split('rel="canonical" href="')[1].split('">')[0]
-
-
             el = el.getElementsByClassName('attrgroup')
             
             // el[0] contains year, title, price
-            // console.log(el[0].innerText.trim())
-            let year = "Year: " + el[0].innerText.trim().substring(0,4)
-            let title = "Title: " + el[0].innerText.trim().substring(4,).trim()
-            // console.log(year, title)
+            console.log(el[0])
+            let year = "year: " + el[0].innerText.trim().substring(0,4)
+            let title = "title: " + el[0].innerText.trim().substring(4,).trim()
 
             // el[1] contains other attributes
             let collection = el[1].innerText.trim().split('\n\n\n\n')
             collection = collection.map(item => item.trim())
 
-            let data = [year, title, ...collection, this_url];
+
+            // year, title
+            let data = [year, title]
+
+            // condition
+            let condition = false
+            for(let i=0; i<collection.length; i++) {
+                if(collection[i].substring(0,9) == 'condition') {
+                    data.push(collection[i])
+                    condition = true}}
+            if(condition == false) {
+                data.push('condition: null')}
+
+            // paint color
+            let paintcolor = false
+            for(let i=0; i<collection.length; i++) {
+                if(collection[i].substring(0,11) == 'paint color') {
+                    data.push(collection[i])
+                    paintcolor = true}}
+            if(paintcolor == false) {
+                data.push('paint color: null')}
+
+            // title status
+            let titlestatus = false
+            for(let i=0; i<collection.length; i++) {
+                if(collection[i].substring(0,12) == 'title status') {
+                    data.push(collection[i])
+                    titlestatus = true}}
+            if(titlestatus == false) {
+                data.push('title status: null')}
+
+            // transmission
+            let transmission = false
+            for(let i=0; i<collection.length; i++) {
+                if(collection[i].substring(0,12) == 'transmission') {
+                    data.push(collection[i])
+                    transmission = true}}
+            if(transmission == false) {
+                data.push('transmission: null')}
+
+            data.push(this_url)
             dataset.push(data)
-        })
-    } 
+    })}
     // console.log(dataset)
     return(dataset);
 }

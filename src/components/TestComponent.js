@@ -23,7 +23,7 @@ componentDidMount() {
             dataset: dataset})
 
         let newstring = dataset.map((row, i) => row + "\n")
-        var file = new File(newstring, "test.csv", {type: "text/plain;charset=utf-8"});
+        var file = new File(newstring, "test.csv", {type: "data:text/csv:html;charset=utf-8"});
         FileSaver.saveAs(file);     
         console.log(dataset)
     }, 5000))
