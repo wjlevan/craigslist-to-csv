@@ -19,7 +19,16 @@ export function parseData(response) {
 export function visitLinks(links) {
     let axios = require('axios');
 
-    let dataset = [];
+    let dataset = [[
+        "year",
+        "title",
+        "condition",
+        "paint color",
+        "title status",
+        "transmission",
+        "link"
+    ]];
+    
     for(var i=0; i<links.length; i++) {
     // for(let i=0; i<1; i++) {
         let el = document.createElement('html');
@@ -38,7 +47,6 @@ export function visitLinks(links) {
             // el[1] contains other attributes
             let collection = el[1].innerText.trim().split('\n\n\n\n')
             collection = collection.map(item => item.trim())
-
 
             // year, title
             let data = [year, title]
@@ -79,7 +87,10 @@ export function visitLinks(links) {
             if(transmission == false) {
                 data.push('transmission: null')}
 
+            // url
             data.push(this_url)
+
+            // add array
             dataset.push(data)
     })}
     // console.log(dataset)
