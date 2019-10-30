@@ -26,8 +26,14 @@ export function visitLinks(links) {
         let response = axios.get(CORS_PROXY + links[i]);        
         response.then(response => {
             el.innerHTML = response.data;
-            el = el.getElementsByClassName('attrgroup')
 
+
+            
+            let this_url = el.innerHTML.split('rel="canonical" href="')[1].split('">')[0]
+
+
+            el = el.getElementsByClassName('attrgroup')
+            
             // el[0] contains year, title, price
             // console.log(el[0].innerText.trim())
             let year = "Year: " + el[0].innerText.trim().substring(0,4)
@@ -38,7 +44,7 @@ export function visitLinks(links) {
             let collection = el[1].innerText.trim().split('\n\n\n\n')
             collection = collection.map(item => item.trim())
 
-            let data = [year, title, ...collection];
+            let data = [year, title, ...collection, this_url];
             dataset.push(data)
         })
     } 

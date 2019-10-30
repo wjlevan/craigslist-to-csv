@@ -19,8 +19,6 @@ componentDidMount() {
     .then(response => parseData(response))
     .then(links => visitLinks(links))
     .then(dataset => setTimeout(() => {
-        // dataset = dataset.map(row => row.join('; '))
-        // console.log(dataset[0])
         this.setState({
             dataset: dataset})
 
@@ -35,13 +33,17 @@ componentDidMount() {
     render() {
         return(
             <div className="display">
-                    {/* < ExportCSV /> */}
                     <table>
                         <tbody>
                             {this.state.dataset.map((row, i) => 
                                 <tr key={i}>
                                     {/* {console.log(row)} */}
-                                    {row.map((col, j) => <td key={j}>{col}</td>)}
+                                    {row.map((col, j) => 
+                                        j === row.length - 1 ? 
+                                            <td key={j}><a href={col} target="_blank" rel="noopener noreferrer">{col}</a></td> :
+                                            <td key={j}>{col}</td> 
+                                     )}
+
                                 </tr>
                             )}
                         </tbody>
