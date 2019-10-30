@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { makeRequest, parseData, visitLinks } from './functions';
+import { ExportCSV } from './ExcelComponent';
 
 export class TestComponent extends Component {
     constructor(props) {
@@ -16,20 +17,20 @@ componentDidMount() {
     makeRequest()
     .then(response => parseData(response))
     .then(links => visitLinks(links))
-    .then(dataset => {
-        setTimeout(() => {
-            // console.log(dataset[0][0])
-            this.setState({
-                year: dataset[0][0]  })
-        }, 1000)})
+    .then(dataset => setTimeout(() => {
+        dataset = dataset.map(row => row.join('; '))
+        // console.log(dataset[0])
+        this.setState({
+            dataset: dataset})
+    }, 5000))
 
-    }
-
+}
 
     render() {
         return(
             <div>
-                {this.state.year}
+                    < ExportCSV />
+                {this.state.dataset.map((el, index) => <div key={index}>{el}<br/><br/></div> )}
 
             </div>
         )
