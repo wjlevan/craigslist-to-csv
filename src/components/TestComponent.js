@@ -9,9 +9,12 @@ export class TestComponent extends Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.download = this.download.bind(this)
+        this.handleReset = this.handleReset.bind(this)
         this.state = {
             dataset: [],
-            value: ""
+            value: "",
+            showDownload: "false",
+            loading: "false"
         }
     }
 
@@ -21,7 +24,6 @@ handleChange(event) {
         value: event.target.value
     })
 }
-
 
 download() {
     let temp = this.state.dataset
@@ -34,26 +36,46 @@ download() {
     FileSaver.saveAs(file);     
 }
 
+handleReset() {
+    this.setState({
+        dataset: [],
+        value: "",
+        showDownload: "false",
+        loading: "false"
+    })
+}
+
 handleSubmit(event) {
     event.preventDefault();
-
+    this.setState({loading: "true"})
     makeRequest(this.state.value)
     .then(response => parseData(response))
     .then(links => visitLinks(links))
     .then(dataset => setTimeout(() => {
         this.setState({
-            dataset: dataset})
-    }, 5000))    
+            dataset: dataset,
+            showDownload: "true",
+            loading: "false"
+        })
+    }, 5000))
 }
 
     render() {
         return(
             <div className="display">
                     <form onSubmit={this.handleSubmit}>
-                        <input type='text' value={this.state.value} onChange={this.handleChange}>
-                        </input>
+                        <input type='text' value={this.state.value} onChange={this.handleChange}></input>
+                        <input type='submit' value="Search" onClick={this.handleSubmit}></input>
+                        <input type="button" value="Reset" onClick={this.handleReset}/>
                     </form> <br/>
-                    <input type="submit" value="Download" onClick={this.download}></input>
+
+
+                    {this.state.loading == "false" ? <span/> : <h1>LOADING</h1>}
+
+                    <br />
+
+                    {this.state.showDownload == "false" ? <span/> : <input type="submit" value="Download" onClick={this.download} />}
+
 
                     <table>
                         <tbody>

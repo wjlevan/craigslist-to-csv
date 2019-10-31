@@ -20,7 +20,7 @@ export function visitLinks(links) {
     let axios = require('axios');
 
     let dataset = [[
-        " ",
+        "#",
         "year",
         "title",
         "price",
