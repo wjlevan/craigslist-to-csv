@@ -1,8 +1,8 @@
 var CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
 
-export function makeRequest() {
+export function makeRequest(makemodel) {
     let axios = require('axios');
-    let url = CORS_PROXY + "https://sfbay.craigslist.org/search/cta?auto_make_model=ls400"
+    let url = CORS_PROXY + "https://sfbay.craigslist.org/search/cta?auto_make_model=" + makemodel.replace(" ", "+")
     return axios.get(url);
 }
 
@@ -23,6 +23,7 @@ export function visitLinks(links) {
         " ",
         "year",
         "title",
+        "price",
         "condition",
         "paint color",
         "title status",
@@ -38,12 +39,14 @@ export function visitLinks(links) {
         let response = axios.get(CORS_PROXY + links[i]);        
         response.then(response => {
             el.innerHTML = response.data;
+
             // let this_url = "=HYPERLINK(\"" + el.innerHTML.split('rel="canonical" href="')[1].split('">')[0] + "\")"
             let this_url = el.innerHTML.split('rel="canonical" href="')[1].split('">')[0]
+        
+            let price = "price: " + el.getElementsByClassName("price")[0].innerHTML
             el = el.getElementsByClassName('attrgroup')
-            
-            // el[0] contains year, title, price
-            console.log(el[0])
+
+            // el[0] contains year, title
             let year = "year: " + el[0].innerText.trim().substring(0,4)
             let title = "title: " + el[0].innerText.trim().substring(4,).trim()
 
@@ -52,7 +55,7 @@ export function visitLinks(links) {
             collection = collection.map(item => item.trim())
 
             // year, title
-            let data = [year, title]
+            let data = [year, title, price]
 
             // condition
             let condition = false
@@ -94,7 +97,7 @@ export function visitLinks(links) {
             data.push(this_url)
 
             // remove key
-            for(let i=0; i<6; i++) {
+            for(let i=0; i<7; i++) {
                 data[i] = data[i].split(': ')[1].trim()}
 
             // add array

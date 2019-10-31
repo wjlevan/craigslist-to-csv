@@ -6,33 +6,55 @@ import FileSaver from 'file-saver';
 export class TestComponent extends Component {
     constructor(props) {
         super(props);
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+        this.download = this.download.bind(this)
         this.state = {
             dataset: [],
-            year: [],
-            title: [],
-            price: []
+            value: ""
         }
     }
 
-componentDidMount() {
-    makeRequest()
+handleChange(event) {
+    event.preventDefault();
+    this.setState({
+        value: event.target.value
+    })
+}
+
+
+download() {
+    let temp = this.state.dataset
+    console.log(temp)
+    for(let i=1; i<temp.length; i++) {
+        temp[i][temp[i].length - 1] = "=HYPERLINK(\"" + temp[i][temp[i].length - 1] + "\")"
+    }
+    let newstring = this.state.dataset.map((row, i) => row + "\n")    
+    let file = new File(newstring, "test.csv", {type: "data:text/csv:html;charset=utf-8"});
+    FileSaver.saveAs(file);     
+}
+
+handleSubmit(event) {
+    event.preventDefault();
+
+    makeRequest(this.state.value)
     .then(response => parseData(response))
     .then(links => visitLinks(links))
     .then(dataset => setTimeout(() => {
         this.setState({
             dataset: dataset})
-
-        let newstring = dataset.map((row, i) => row + "\n")
-        var file = new File(newstring, "test.csv", {type: "data:text/csv:html;charset=utf-8"});
-        FileSaver.saveAs(file);     
-        console.log(dataset)
-    }, 5000))
-    
+    }, 5000))    
 }
 
     render() {
         return(
             <div className="display">
+                    <form onSubmit={this.handleSubmit}>
+                        <input type='text' value={this.state.value} onChange={this.handleChange}>
+                        </input>
+                    </form> <br/>
+                    <input type="submit" value="Download" onClick={this.download}></input>
+
                     <table>
                         <tbody>
                             {this.state.dataset.map((row, i) => 
