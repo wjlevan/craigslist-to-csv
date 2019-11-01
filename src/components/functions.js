@@ -12,6 +12,8 @@ export function parseData(response) {
     el = el.getElementsByClassName('result-title hdrlnk');
     let links = [];
     for(let i=0; i<el.length; i++) {
+        for(let wait=0; wait<500000; wait++){}
+
         links.push(el[i].attributes[0].nodeValue);}    
     return(links);
 }
@@ -32,18 +34,31 @@ export function visitLinks(links) {
     ]];
 
     let counter = 1;
-    
+    for(let wait=0; wait<5000000; wait++){}
+
     for(var i=0; i<links.length; i++) {
     // for(let i=0; i<1; i++) {
+
+
+        for(let wait=0; wait<5000000; wait++){}
         let el = document.createElement('html');
-        let response = axios.get(CORS_PROXY + links[i]);        
+        let response = axios.get(CORS_PROXY + links[i]);    
+        for(let wait=0; wait<5000000; wait++){}
+    
         response.then(response => {
+            for(let wait=0; wait<500000; wait++){}
+
             el.innerHTML = response.data;
 
             // let this_url = "=HYPERLINK(\"" + el.innerHTML.split('rel="canonical" href="')[1].split('">')[0] + "\")"
+            
             let this_url = el.innerHTML.split('rel="canonical" href="')[1].split('">')[0]
-        
-            let price = "price: " + el.getElementsByClassName("price")[0].innerHTML
+
+            for(let wait=0; wait<5000000; wait++){}
+            
+
+            console.log(el.getElementsByClassName("price")[0].innerText == undefined ? links[i] : el.getElementsByClassName("price")[0].innerText)
+            let price = "price: " + (el.getElementsByClassName("price")[0].innerText ? el.getElementsByClassName("price")[0].innerHTML : "ERROR", links[i])
             el = el.getElementsByClassName('attrgroup')
 
             // el[0] contains year, title

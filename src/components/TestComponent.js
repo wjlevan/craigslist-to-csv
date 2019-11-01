@@ -47,7 +47,11 @@ handleReset() {
 
 handleSubmit(event) {
     event.preventDefault();
-    this.setState({loading: "true"})
+    this.setState({
+        loading: "true",
+        dataset: [],
+        showDownload: "false"
+    })
     makeRequest(this.state.value)
     .then(response => parseData(response))
     .then(links => visitLinks(links))
