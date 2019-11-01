@@ -1,4 +1,4 @@
-SF Craigslist Cars/Trucks Search Tool
+<h1>SF Craigslist Cars/Trucks Search Tool<h1>
 
 This web application scrapes craigslist by the specified make/model and returns results based on listing parameters.  <br />
 Results can be downloaded in .csv format.
