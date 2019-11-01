@@ -71,7 +71,7 @@ handleSubmit(event) {
                     </form> <br/>
 
 
-                    {this.state.loading == "false" ? <span/> : <h1>LOADING</h1>}
+                    {this.state.loading == "false" ? <span/> : <h1 className="item">LOADING</h1>}
 
                     <br />
 
@@ -84,8 +84,8 @@ handleSubmit(event) {
                                 <tr key={i}>
                                     {row.map((col, j) => 
                                         ((j === row.length - 1) && (i > 0)) ? 
-                                            <td key={j}><a href={col} target="_blank" rel="noopener noreferrer">{col}</a></td> :
-                                            <td key={j}>{col}</td> 
+                                            <td className="link" key={j}><a href={col} target="_blank" rel="noopener noreferrer">{col}</a></td> :
+                                            <td className="item" key={j}>{col}</td> 
                                      )}
 
                                 </tr>

@@ -1,9 +1,17 @@
 .display {
-    color: darkslategrey;
+    color: white;
     font-size: 12px;
 }
 
 #makemodel {
-    color: white;
+    color: black;
     font-size: 16px;
+}
+
+.item {
+    color: black;
+}
+
+.href {
+    color: blue;
 }
