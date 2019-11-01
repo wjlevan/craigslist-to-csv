@@ -13,6 +13,6 @@ Results returned: <br />
 (7) transmission <br />
 (8) website link <br /> <br /> <br />
 
-<sub>Note: Current support is limited to Google Chrome, Mozilla Firefox, and Apple Safari. No disclaimer is made regarding other browsers. </sub>
+<sub>Disclaimer: Browser support includes Google Chrome, Mozilla Firefox, and Apple Safari. No disclaimer is made regarding other browsers. </sub>
 
 
