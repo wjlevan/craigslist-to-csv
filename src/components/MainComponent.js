@@ -34,13 +34,7 @@ download() {
 }
 
 handleReset() {
-    this.setState({
-        dataset: [], // reset results
-        value: "", // reset input
-        showDownload: "false", // hide download button
-        loading: "false" // hide loading
-    })
-}
+    window.location="/"}
 
 handleSubmit(event) {
     event.preventDefault();
