@@ -1,6 +1,6 @@
 SF Craigslist Cars/Trucks Search Tool
 
-This web application scrapes craigslist by the specified make/model and returns results based on post parameters.  <br />
+This web application scrapes craigslist by the specified make/model and returns results based on listing parameters.  <br />
 Results can be downloaded in .csv format.
 
 Results returned: <br />
@@ -11,4 +11,8 @@ Results returned: <br />
 (5) paint color <br />
 (6) title status <br />
 (7) transmission <br />
-(8) website link
+(8) website link <br /> <br /> <br />
+
+<sub>Note: Current support is limited to Google Chrome, Mozilla Firefox, and Apple Safari. No disclaimer is made regarding other browsers. </sub>
+
+
