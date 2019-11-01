@@ -64,6 +64,7 @@ handleSubmit(event) {
         return(
             <div className="display">
                     <form onSubmit={this.handleSubmit}>
+                        <label id="makemodel">Make/Model: </label>
                         <input type='text' value={this.state.value} onChange={this.handleChange}></input>
                         <input type='submit' value="Search" onClick={this.handleSubmit}></input>
                         <input type="button" value="Reset" onClick={this.handleReset}/>
