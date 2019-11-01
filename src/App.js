@@ -1,13 +1,12 @@
 import React from 'react';
 import './App.css';
-import { TestComponent } from './components/TestComponent';
+import { MainComponent } from './components/MainComponent';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        
-        <TestComponent/>
+        <MainComponent/>
       </header>
     </div>
   );
