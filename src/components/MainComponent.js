@@ -10,6 +10,7 @@ export class MainComponent extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.download = this.download.bind(this)
         this.handleReset = this.handleReset.bind(this)
+        this.handleLoading = this.handleLoading.bind(this)
         this.state = {
             dataset: [],
             value: "",
@@ -38,10 +39,13 @@ handleReset() {
 
 handleSubmit(event) {
     event.preventDefault();
+    
     this.setState({
         loading: "true", // show loading
         dataset: [], // clear results
         showDownload: "false"}) // hide download button
+
+    this.handleLoading();
 
     makeRequest(this.state.value) // search based on keyword
     .then(response => parseData(response)) // get links
@@ -54,6 +58,23 @@ handleSubmit(event) {
     }, 5500)) // buffer for slow internet
 }
 
+
+handleLoading() {
+    let interval = 50;
+    let imgDelta = 291;
+    let numImg = 24;
+    let position = (imgDelta*numImg);
+
+    let x = setInterval (() => {
+        if(this.state.loading == "true") {
+            document.getElementById("item").style.backgroundPosition = `0px ${position}px`;
+            if(position>0) {
+                position = position - imgDelta;}
+            else {
+                position = (imgDelta*numImg);}
+        } else {clearInterval(x)}
+    }, interval);
+}
     render() {
         return(
             <div className="display">
@@ -65,8 +86,11 @@ handleSubmit(event) {
                         <input type="button" value="Reset" onClick={this.handleReset}/>
                     </form> <br/>
 
-                    {this.state.loading == "false" ? <span/> : <h1 className="item">LOADING</h1>}<br />
-                    {this.state.showDownload == "false" ? <span/> : <input type="submit" value="Download .csv" onClick={this.download} />}<br/>
+                    {this.state.loading == "false" ? <span/> : 
+                                                     <span id="item" />          }<br />
+
+                    {this.state.showDownload == "false" ? <span/> : 
+                                                          <input type="submit" value="Download .csv" onClick={this.download} />}<br/>
 
                     <table>
                         <tbody>
