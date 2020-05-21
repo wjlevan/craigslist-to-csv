@@ -1,0 +1,25 @@
+.black {
+    color:black
+}
+
+.container-container {
+    width: 100vw;
+    border: 1px solid black;
+}
+
+.form-button, .form-select {
+    margin: 10px;
+}
+
+.form-form {
+    line-height: 0;
+    border: 3px solid pink;
+    margin: 0px;
+    padding: 0px;
+    /* position: relative; */
+}
+
+.title-title {
+    line-height: 0;
+    /* border: 3px solid blue; */
+}
