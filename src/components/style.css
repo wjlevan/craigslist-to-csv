@@ -19,6 +19,10 @@
     /* position: relative; */
 }
 
+.form-select-label {
+    font-size: 14px;
+}
+
 .title-title {
     line-height: 0;
     /* border: 3px solid blue; */
