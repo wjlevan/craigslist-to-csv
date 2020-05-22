@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React, { setState } from 'react'
 
-export default class Results extends Component {
-    render() {
+function Results() {
         return (
             <div class="">
                 <h1>Results</h1>
             </div>
         )
-    }
 }
 
+export default Results

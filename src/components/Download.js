@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
+import React, { setState } from 'react'
 
-export default class Download extends Component {
-    render() {
+function Download() {
         return (
             <div class="">
                 <h1>Download</h1>
             </div>
         )
-    }
 }
 
+export default Download

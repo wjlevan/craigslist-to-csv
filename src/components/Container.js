@@ -18,14 +18,13 @@
 // Table Results
 // Pagination
 
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import Title from './Title.js'
 import Form from './Form.js'
 import Download from './Download.js'
 import Results from './Results.js'
 
-export default class Container extends Component {
-    render() {
+function Container() {
         return (
             <div class="container-container">
                 <Title/>
@@ -34,6 +33,6 @@ export default class Container extends Component {
                 <Results/>
             </div>
         )
-    }
 }
 
+export default Container

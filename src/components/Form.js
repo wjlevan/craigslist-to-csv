@@ -1,8 +1,7 @@
-import React, { Component, useState } from 'react'
-import { handleSubmit } from './Functions.js'
+import React, { useState, useEffect } from 'react'
+import { makeRequest } from './Functions.js'
 
-export default class Title extends Component {
-    render() {
+function Form() {
         // Constants here
         // Populate from actual site later 
         var city = {
@@ -33,22 +32,34 @@ export default class Title extends Component {
             )
         })
 
-        const [keyword, setKeyword] = useState(0)
+        const [keyword, setKeyword] = useState('')
 
-        var handleKeywordChange = function(event) {
-            this.setState({keyword: event.target.value})
+        const handleKeywordChange = function(event) {
+            event.preventDefault()
+            setKeyword(event.target.value)
         }
 
+        // useEffect(() => {
+        //     console.log(keyword)
+        // }, [keyword])
+
+        const handleSubmit = function(event) {
+            event.preventDefault()
+            makeRequest(keyword)
+        }
+
+
         return (
-            <form class="form-form" onSubmit={handleSubmit(this.state.keyword)}>
+            <form class="form-form" onSubmit={handleSubmit}>
                 {options_container}
                 <div class="field">
-                    <input type="text" name="keyword" placeholder="Enter here" onChange={() => setKeyword(this.value)}/>
+                    <input type="text" name="keyword" placeholder="Enter here" onChange={handleKeywordChange}/>
                     <button class="form-button" type="submit">Search</button>
-                    <button class="form-button" type="submit">Reset</button>
+                    {/* need type */}
+                    <button class="form-button" type="">Reset</button> 
                 </div>
             </form>
         )
-    }
 }
 
+export default Form
