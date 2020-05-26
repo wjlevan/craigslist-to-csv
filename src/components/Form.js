@@ -17,14 +17,14 @@ function Form(props) {
         }
         const options = [city, category, subcategory]
         // outside map select of each option
-        const options_container = options.map(option => {
+        const options_container = options.map((option, index) => {
             return (
-                <span>
+                <span key={index}>
                     <label className="form-select-label">{option.name}:</label>
                     <select className="form-select" name={option}>
                         {/* inside map option of each choice */}
                         {option.choices.map(choice => {
-                            return <option value={choice}>{choice}</option>
+                            return <option key={choice} value={choice}>{choice}</option>
                         })}
                     </select>
                 </span>
@@ -44,12 +44,16 @@ function Form(props) {
 
         const handleSubmit = event => {
             event.preventDefault()
+            if(props.data !== '')
+                props.setData('')
+            props.setLoading(1)
             const makeRequest = keyword => {
                 const BACKEND_API = 'http://127.0.0.1:5000/'
             
                 const URL = BACKEND_API + keyword
                 // Send keyword to backend
                 // console.log(URL)
+                const jsonArray = []
                 fetch(URL, {
                     method: "GET",
                     headers: {
@@ -58,26 +62,31 @@ function Form(props) {
                       }
                   })
                 .then(response => response.json())
-                .then(data => {
-                    props.setData(data)
-                })
+                .then(data => data.forEach((item, index) => jsonArray.push(JSON.parse(item))))
+                .then(jsonArr => props.setData(jsonArray))
+                .then(() => props.setLoading(0))
+
             }
             makeRequest(keyword)
         }
 
-        useEffect(() => {
-        }, [props.data])
+        const handleReset = event => {
+            props.setLoading(-1)
+        }
 
+        useEffect(() => {
+        }, [props.data, props.loading])
 
 
         return (
             <form className="form-form" onSubmit={handleSubmit}>
                 {options_container}
                 <div className="field">
-                    <input type="text" name="keyword" placeholder="Enter here" onChange={handleKeywordChange}/>
+                    <label className="form-search-label">Search:</label>
+                    <input type="text" name="keyword" placeholder="Enter keyword" onChange={handleKeywordChange}/>
                     <button className="form-button" type="submit">Search</button>
                     {/* need type */}
-                    <button className="form-button" type="">Reset</button> 
+                    <input type="reset" className="form-button" value="Reset" onClick={handleReset}/> 
                 </div>
             </form>
         )

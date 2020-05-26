@@ -1,9 +1,12 @@
-import React, { setState, useEffect } from 'react'
+import React from 'react'
+import Table from './Table'
 
 function Results(props) {
     return (
-            <div className="">
-                <h1>{props.data}</h1>
+            <div className="results-container">
+                {props.loading===0 &&
+                <Table data={props.data}/>
+                }
             </div>
         )
 }

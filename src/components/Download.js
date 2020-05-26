@@ -1,9 +1,15 @@
-import React, { setState } from 'react'
+import React from 'react'
+import loading from './assets/loading.gif'
 
-function Download() {
+function Download(props) {
         return (
             <div className="">
-                <h1>Download</h1>
+                {props.loading===0 && <div>
+                    <input type="button" value="Download"/>
+                </div>}
+                {props.loading===1 && <div>
+                    <img src={loading} alt="loading"/>    
+                </div>}
             </div>
         )
 }
