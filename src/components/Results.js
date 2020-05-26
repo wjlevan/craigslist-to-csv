@@ -1,9 +1,9 @@
-import React, { setState } from 'react'
+import React, { setState, useEffect } from 'react'
 
-function Results() {
-        return (
+function Results(props) {
+    return (
             <div className="">
-                <h1>Results</h1>
+                <h1>{props.data}</h1>
             </div>
         )
 }

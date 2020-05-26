@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.19.2",
+    "eslint": "^7.1.0",
     "file-saver": "^2.0.2",
     "fomantic-ui": "^2.8.4",
     "react": "^16.13.1",
@@ -35,5 +36,8 @@
       "last 1 safari version",
       "ie 11"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.0.2"
   }
 }

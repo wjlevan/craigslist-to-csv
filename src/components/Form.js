@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { makeRequest } from './Functions.js'
 
-function Form() {
+function Form(props) {
         // Constants here
         // Populate from actual site later 
-        var city = {
+        const city = {
             name: "City",
             choices: ["Sacramento", "Elk Grove"]
         }
-        var category = {
+        const category = {
             name: "Category",
             choices: ["Cars", "Computers"]
         }
-        var subcategory = {
+        const subcategory = {
             name: "Subcategory",
             choices: ["Owner", "Dealer"]
         }
@@ -34,7 +33,7 @@ function Form() {
 
         const [keyword, setKeyword] = useState('')
 
-        const handleKeywordChange = function(event) {
+        const handleKeywordChange = event => {
             event.preventDefault()
             setKeyword(event.target.value)
         }
@@ -43,10 +42,32 @@ function Form() {
         //     console.log(keyword)
         // }, [keyword])
 
-        const handleSubmit = function(event) {
+        const handleSubmit = event => {
             event.preventDefault()
+            const makeRequest = keyword => {
+                const BACKEND_API = 'http://127.0.0.1:5000/'
+            
+                const URL = BACKEND_API + keyword
+                // Send keyword to backend
+                // console.log(URL)
+                fetch(URL, {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                      }
+                  })
+                .then(response => response.json())
+                .then(data => {
+                    props.setData(data)
+                })
+            }
             makeRequest(keyword)
         }
+
+        useEffect(() => {
+        }, [props.data])
+
 
 
         return (

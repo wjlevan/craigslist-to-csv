@@ -25,12 +25,14 @@ import Download from './Download.js'
 import Results from './Results.js'
 
 function Container() {
+        const [data, setData] = useState(0)
+
         return (
             <div className="container-container">
                 <Title/>
-                <Form/>
+                <Form data={data} setData={setData}/>
                 <Download/>
-                <Results/>
+                <Results data={data}/>
             </div>
         )
 }
