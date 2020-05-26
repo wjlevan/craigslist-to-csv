@@ -2,7 +2,7 @@ import React, { setState } from 'react'
 
 function Download() {
         return (
-            <div class="">
+            <div className="">
                 <h1>Download</h1>
             </div>
         )

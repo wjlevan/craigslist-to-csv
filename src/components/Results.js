@@ -2,7 +2,7 @@ import React, { setState } from 'react'
 
 function Results() {
         return (
-            <div class="">
+            <div className="">
                 <h1>Results</h1>
             </div>
         )

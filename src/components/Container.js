@@ -26,7 +26,7 @@ import Results from './Results.js'
 
 function Container() {
         return (
-            <div class="container-container">
+            <div className="container-container">
                 <Title/>
                 <Form/>
                 <Download/>

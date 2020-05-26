@@ -21,8 +21,8 @@ function Form() {
         const options_container = options.map(option => {
             return (
                 <span>
-                    <label class="form-select-label">{option.name}:</label>
-                    <select class="form-select" name={option}>
+                    <label className="form-select-label">{option.name}:</label>
+                    <select className="form-select" name={option}>
                         {/* inside map option of each choice */}
                         {option.choices.map(choice => {
                             return <option value={choice}>{choice}</option>
@@ -50,13 +50,13 @@ function Form() {
 
 
         return (
-            <form class="form-form" onSubmit={handleSubmit}>
+            <form className="form-form" onSubmit={handleSubmit}>
                 {options_container}
-                <div class="field">
+                <div className="field">
                     <input type="text" name="keyword" placeholder="Enter here" onChange={handleKeywordChange}/>
-                    <button class="form-button" type="submit">Search</button>
+                    <button className="form-button" type="submit">Search</button>
                     {/* need type */}
-                    <button class="form-button" type="">Reset</button> 
+                    <button className="form-button" type="">Reset</button> 
                 </div>
             </form>
         )
